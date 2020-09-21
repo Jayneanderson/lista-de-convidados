@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width"/>
+	<title>Convidados para o evento</title>
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+	
+	<section class="panel panel-default" style="margin: 10px">
+		<div>
+			<h1 class="panel-title">Lista de Convidados do Evento</h1>
+		</div>	
+		
+		<div th:each="msg : ${mensagem}" style="font-size: 12px" class="text-danger">
+					<span th:text="${msg}"></span>
+		</div>
+		<!--salva o novo objeto e diz para onde deve enviar o objeto -->	
+		<form class="form-inline" method="POST" th:action="@{/convidados}" th:object="${convidado}" style="margin: 20px 0">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
+				<input type="text" class="form-control" placeholder="Acompanhante" th:field="*{quantidadeAcompanhantes}"/>
+				<button type="submit" class="btn btn-dark" style="margin: 20px">Adicionar
+				</button>
+			</div>
+		</form>
+		
+		<div class="panel-body">
+			<table class="table">
+				<thead class=" thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Acompanhante</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="convidado : ${apelidoConvidado}">
+						<td th:text="${convidado.id}"></td>
+						<td th:text="${convidado.nome}"></td>
+						<td th:text="${convidado.quantidadeAcompanhantes}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div><!-- fim div panel -->
+	</section>
+	
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
